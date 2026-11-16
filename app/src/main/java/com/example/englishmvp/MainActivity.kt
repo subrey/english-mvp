@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
                     val nav = rememberNavController()
                     val scope = rememberCoroutineScope()
                     val xp by store.xp.collectAsState(initial = 0)
+                    val streak by store.streak.collectAsState(initial = 0)
                     val completed = LessonRepository.lessons.associate { lesson ->
                         val done by store.isCompleted(lesson.id).collectAsState(initial = false)
                         lesson.id to done
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(navController = nav, startDestination = "home") {
                         composable("home") {
-                            HomeScreen(xp = xp, completed = completed, onOpenLesson = { nav.navigate("lesson/$it") })
+                            HomeScreen(xp = xp, completed = completed, streak = streak, onOpenLesson = { nav.navigate("lesson/$it") })
                         }
                         composable("lesson/{id}") { backStack ->
                             val id = backStack.arguments?.getString("id") ?: return@composable

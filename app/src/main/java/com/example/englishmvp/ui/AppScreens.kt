@@ -13,13 +13,14 @@ import com.example.englishmvp.data.Lesson
 import com.example.englishmvp.data.LessonRepository
 
 @Composable
-fun HomeScreen(xp: Int, completed: Map<String, Boolean>, onOpenLesson: (String) -> Unit) {
+fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLesson: (String) -> Unit) {
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Text("Aprende inglés", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(8.dp))
         Card(modifier = Modifier.fillMaxWidth()) {
             Column(Modifier.padding(16.dp)) {
-                Text("XP total: $xp", style = MaterialTheme.typography.titleMedium)
+                Text("🔥 Racha: $streak ${if (streak == 1) "día" else "días"}   ·   XP total: $xp",
+                    style = MaterialTheme.typography.titleMedium)
                 Text("Lecciones completadas: ${completed.values.count { it }} / ${LessonRepository.lessons.size}")
             }
         }
