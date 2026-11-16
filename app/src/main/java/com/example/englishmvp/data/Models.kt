@@ -44,6 +44,61 @@ object LessonRepository {
                 Question("Traduce: \"I read a book\"", listOf("Yo leo un libro", "Yo escribo un libro", "Yo compro un libro", "Yo tengo un libro"), 0),
                 Question("¿Cuál es el pasado de \"go\"?", listOf("Goed", "Went", "Gone", "Going"), 1)
             )
+        ),
+        Lesson(
+            id = "colores",
+            title = "Colores",
+            description = "Los colores en inglés",
+            questions = listOf(
+                Question("¿Cómo se dice \"Rojo\"?", listOf("Blue", "Red", "Green", "White"), 1),
+                Question("¿Qué significa \"Blue\"?", listOf("Azul", "Negro", "Amarillo", "Gris"), 0),
+                Question("Traduce: \"El gato negro\"", listOf("The black cat", "The white cat", "The red cat", "The brown cat"), 0),
+                Question("¿Cómo se dice \"Amarillo\"?", listOf("Yellow", "Purple", "Orange", "Pink"), 0)
+            )
+        ),
+        Lesson(
+            id = "numeros",
+            title = "Números",
+            description = "Del 1 al 10",
+            questions = listOf(
+                Question("¿Qué número es \"Seven\"?", listOf("6", "7", "8", "9"), 1),
+                Question("¿Cómo se dice \"Cinco\"?", listOf("Four", "Six", "Five", "Three"), 2),
+                Question("¿Qué significa \"Ten\"?", listOf("2", "10", "12", "20"), 1),
+                Question("Completa: I have ___ brothers. (dos)", listOf("one", "two", "ten", "seven"), 1)
+            )
+        ),
+        Lesson(
+            id = "familia",
+            title = "Familia",
+            description = "Miembros de la familia",
+            questions = listOf(
+                Question("¿Qué significa \"Mother\"?", listOf("Padre", "Madre", "Hermana", "Abuela"), 1),
+                Question("¿Cómo se dice \"Hermano\"?", listOf("Sister", "Cousin", "Brother", "Uncle"), 2),
+                Question("Traduce: \"Mi padre trabaja aquí\"", listOf("My father works here", "My mother works here", "My father lives here", "My father works there"), 0),
+                Question("¿Qué significa \"Daughter\"?", listOf("Hijo", "Tía", "Hija", "Prima"), 2)
+            )
+        ),
+        Lesson(
+            id = "comida",
+            title = "Comida",
+            description = "Comidas y bebidas",
+            questions = listOf(
+                Question("¿Cómo se dice \"Pan\"?", listOf("Rice", "Bread", "Meat", "Cheese"), 1),
+                Question("¿Qué significa \"Milk\"?", listOf("Leche", "Agua", "Café", "Vino"), 0),
+                Question("Traduce: \"Me gusta el pollo\"", listOf("I like chicken", "I like fish", "I like rice", "I drink chicken"), 0),
+                Question("¿Cómo se dice \"Huevo\"?", listOf("Egg", "Apple", "Sugar", "Salt"), 0)
+            )
+        ),
+        Lesson(
+            id = "frases",
+            title = "Frases útiles",
+            description = "Expresiones del día a día",
+            questions = listOf(
+                Question("¿Cómo se dice \"¿Cómo estás?\"?", listOf("Who are you?", "How are you?", "Where are you?", "What time is it?"), 1),
+                Question("¿Qué significa \"Excuse me\"?", listOf("De nada", "Perdón / Disculpe", "Buenas noches", "Hasta luego"), 1),
+                Question("Traduce: \"No entiendo\"", listOf("I understand", "I don't know", "I don't understand", "I can't speak"), 2),
+                Question("¿Cómo se dice \"¿Cuánto cuesta?\"?", listOf("What time is it?", "Where is it?", "How old are you?", "How much is it?"), 3)
+            )
         )
     )
 }
