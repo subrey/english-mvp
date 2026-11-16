@@ -60,18 +60,26 @@ fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Uni
                 answered && isCorrect -> Button(onClick = {}, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), enabled = false) { Text(opt) }
                 answered && selected == i -> Button(onClick = {}, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error), enabled = false) { Text(opt) }
-                else -> OutlinedButton(onClick = { if (!answered) selected = i }, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), enabled = !answered) { Text(opt) }
+                else -> OutlinedButton(onClick = { selected = i }, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), enabled = !answered) { Text(opt) }
             }
         }
         Spacer(Modifier.weight(1f))
-        if (!answered) {
-            Button(onClick = { if (selected != null) { answered = true; if (selected == q.correctIndex) correctCount++ } },
-                enabled = selected != null, modifier = Modifier.fillMaxWidth()) { Text("Comprobar") }
-        } else {
+        if (answered) {
+            if (selected == q.correctIndex) {
+                Text("¡Correcto! 🎉", color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            } else {
+                Text("Incorrecto ❌ La respuesta era: ${q.options[q.correctIndex]}",
+                    color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.titleMedium)
+            }
+            Spacer(Modifier.height(8.dp))
             Button(onClick = {
                 if (index < lesson.questions.lastIndex) { index++; selected = null; answered = false }
                 else onFinish(correctCount, lesson.questions.size)
             }, modifier = Modifier.fillMaxWidth()) { Text(if (index < lesson.questions.lastIndex) "Siguiente" else "Finalizar") }
+        } else {
+            Button(onClick = { if (selected != null) { answered = true; if (selected == q.correctIndex) correctCount++ } },
+                enabled = selected != null, modifier = Modifier.fillMaxWidth()) { Text("Comprobar") }
         }
         TextButton(onClick = onBack, modifier = Modifier.align(Alignment.CenterHorizontally)) { Text("Salir") }
     }
