@@ -1,8 +1,10 @@
 package com.example.englishmvp.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -42,15 +44,47 @@ fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLess
             }
         }
         Spacer(Modifier.height(16.dp))
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            items(LessonRepository.lessons) { lesson ->
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            itemsIndexed(LessonRepository.lessons) { i, lesson ->
                 val done = completed[lesson.id] == true
-                Card(onClick = { onOpenLesson(lesson.id) }, modifier = Modifier.fillMaxWidth()) {
-                    Column(Modifier.padding(16.dp)) {
-                        Text(lesson.title, style = MaterialTheme.typography.titleLarge)
-                        Text(lesson.description, style = MaterialTheme.typography.bodyMedium)
-                        Text(if (done) "✓ Completada" else "Pendiente",
-                            color = if (done) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary)
+                val unlocked = i == 0 || completed[LessonRepository.lessons[i - 1].id] == true
+                Card(
+                    onClick = { if (unlocked) onOpenLesson(lesson.id) },
+                    enabled = unlocked,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier
+                                .size(52.dp)
+                                .background(
+                                    when {
+                                        done -> MaterialTheme.colorScheme.primary
+                                        unlocked -> MaterialTheme.colorScheme.secondaryContainer
+                                        else -> MaterialTheme.colorScheme.surfaceVariant
+                                    },
+                                    CircleShape
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                if (done) "✓" else if (unlocked) "${i + 1}" else "🔒",
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        Spacer(Modifier.width(12.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text(lesson.title, style = MaterialTheme.typography.titleMedium)
+                            Text(
+                                when {
+                                    done -> "✓ Completada"
+                                    unlocked -> lesson.description
+                                    else -> "Completa la lección anterior para desbloquear"
+                                },
+                                style = MaterialTheme.typography.bodySmall
+                            )
+                        }
                     }
                 }
             }
@@ -72,6 +106,11 @@ fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Uni
     DisposableEffect(Unit) { onDispose { tts.shutdown() } }
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        LinearProgressIndicator(
+            progress = { (index + if (answered) 1 else 0).toFloat() / lesson.questions.size },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(8.dp))
         Text(lesson.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         Text("Pregunta ${index + 1} de ${lesson.questions.size}")
         Spacer(Modifier.height(16.dp))
@@ -88,7 +127,7 @@ fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Uni
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(Modifier.height(4.dp))
-            Text("Puedes ignorar mayúsculas y acentos de apertura", style = MaterialTheme.typography.bodySmall)
+            Text("Puedes ignorar mayúsculas y signos", style = MaterialTheme.typography.bodySmall)
         } else {
             q.options.forEachIndexed { i, opt ->
                 val isCorrect = i == q.correctIndex
@@ -138,6 +177,7 @@ fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Uni
 @Composable
 fun ResultScreen(correct: Int, total: Int, gainedXp: Int, onDone: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize().padding(24.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("🏆", style = MaterialTheme.typography.displayLarge)
         Text("¡Lección completada!", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(16.dp))
         Text("Aciertos: $correct / $total", style = MaterialTheme.typography.titleLarge)
