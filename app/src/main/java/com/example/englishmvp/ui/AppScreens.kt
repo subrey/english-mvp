@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.englishmvp.data.Lesson
 import com.example.englishmvp.data.LessonRepository
+import com.example.englishmvp.data.TtsHelper
 
 @Composable
 fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLesson: (String) -> Unit) {
@@ -72,9 +73,11 @@ fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Uni
             }
         }
         Spacer(Modifier.weight(1f))
+        LaunchedEffect(index, answered) {
+            if (answered && selected == q.correctIndex) tts.speak(q.options[q.correctIndex])
+        }
         if (answered) {
             if (selected == q.correctIndex) {
-                tts.speak(q.options[q.correctIndex])
                 Text("¡Correcto! 🎉", color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             } else {
