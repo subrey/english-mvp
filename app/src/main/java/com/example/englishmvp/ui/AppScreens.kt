@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.englishmvp.data.Lesson
@@ -48,6 +49,9 @@ fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Uni
     var answered by remember { mutableStateOf(false) }
     var correctCount by remember { mutableIntStateOf(0) }
     val q = lesson.questions[index]
+    val context = LocalContext.current
+    val tts = remember { TtsHelper(context) }
+    DisposableEffect(Unit) { onDispose { tts.shutdown() } }
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Text(lesson.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
@@ -57,16 +61,20 @@ fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Uni
         Spacer(Modifier.height(16.dp))
         q.options.forEachIndexed { i, opt ->
             val isCorrect = i == q.correctIndex
-            when {
-                answered && isCorrect -> Button(onClick = {}, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), enabled = false) { Text(opt) }
-                answered && selected == i -> Button(onClick = {}, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error), enabled = false) { Text(opt) }
-                else -> OutlinedButton(onClick = { selected = i }, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), enabled = !answered) { Text(opt) }
+            Row(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+                when {
+                    answered && isCorrect -> Button(onClick = {}, modifier = Modifier.weight(1f), enabled = false) { Text(opt) }
+                    answered && selected == i -> Button(onClick = {}, modifier = Modifier.weight(1f),
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error), enabled = false) { Text(opt) }
+                    else -> OutlinedButton(onClick = { selected = i }, modifier = Modifier.weight(1f), enabled = !answered) { Text(opt) }
+                }
+                IconButton(onClick = { tts.speak(opt) }) { Text("🔊") }
             }
         }
         Spacer(Modifier.weight(1f))
         if (answered) {
             if (selected == q.correctIndex) {
+                tts.speak(q.options[q.correctIndex])
                 Text("¡Correcto! 🎉", color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             } else {
