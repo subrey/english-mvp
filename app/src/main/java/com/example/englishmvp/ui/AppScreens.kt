@@ -33,8 +33,22 @@ private fun isAnswerCorrect(q: Question, selected: Int?, written: String): Boole
         selected == q.correctIndex
 
 @Composable
-fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLesson: (String) -> Unit) {
+fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLesson: (String) -> Unit, onReset: () -> Unit) {
+    val allDone = LessonRepository.lessons.all { completed[it.id] == true }
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        if (allDone) {
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("🎓", style = MaterialTheme.typography.displayMedium)
+                    Text("¡Curso completado!", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                    Text("Terminaste las ${LessonRepository.lessons.size} lecciones. ¡Excelente trabajo!",
+                        style = MaterialTheme.typography.bodyMedium)
+                    Spacer(Modifier.height(8.dp))
+                    OutlinedButton(onClick = onReset) { Text("Reiniciar progreso") }
+                }
+            }
+            Spacer(Modifier.height(12.dp))
+        }
         Text("Aprende inglés", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(8.dp))
         Card(modifier = Modifier.fillMaxWidth()) {

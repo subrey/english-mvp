@@ -35,7 +35,8 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(navController = nav, startDestination = "home") {
                         composable("home") {
-                            HomeScreen(xp = xp, completed = completed, streak = streak, onOpenLesson = { nav.navigate("lesson/$it") })
+                            HomeScreen(xp = xp, completed = completed, streak = streak, onOpenLesson = { nav.navigate("lesson/$it") },
+                                onReset = { scope.launch { store.resetAll() } })
                         }
                         composable("lesson/{id}") { backStack ->
                             val id = backStack.arguments?.getString("id") ?: return@composable

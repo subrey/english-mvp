@@ -46,5 +46,10 @@ class ProgressStore(private val context: Context) {
         }
     }
 
+    /** Borra XP, racha y progreso de lecciones. */
+    suspend fun resetAll() {
+        context.dataStore.edit { it.clear() }
+    }
+
     private fun epochDayToday(): Long = System.currentTimeMillis() / 86_400_000L
 }
