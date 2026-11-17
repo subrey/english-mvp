@@ -361,6 +361,90 @@ object LessonRepository {
                 Question("¿Qué significa \"Waiter\"?", listOf("Mesero", "Cocinero", "Cliente", "Jefe"), 0),
                 Question("Traduce al inglés: \"La cuenta, por favor\"", type = "write", answer = "the bill please|the check please|can i have the bill")
             )
+        ),
+        Lesson(
+            id = "hora",
+            title = "La hora",
+            description = "Decir la hora (avanzado)",
+            questions = listOf(
+                Question("Traduce: \"It is three o'clock\"", listOf("Son las tres", "Son tres horas", "Tres veces", "Es el tercero"), 0),
+                Question("¿Qué significa \"Half past six\"?", listOf("Seis y media", "Seis y cuarto", "Siete y media", "Seis en punto"), 0),
+                Question("¿Qué significa \"a.m.\"?", listOf("Antes del mediodía", "Después del mediodía", "En la noche", "Medianoche"), 0),
+                Question("¿Qué significa \"Midnight\"?", listOf("Medianoche", "Mediodía", "Mañana", "Anoche"), 0),
+                Question("Traduce al inglés: \"Son las ocho\"", type = "write", answer = "it is eight|its eight|it is eight oclock|its eight oclock")
+            )
+        ),
+        Lesson(
+            id = "familia2",
+            title = "Familia 2",
+            description = "Más miembros de la familia (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Grandmother\"?", listOf("Abuela", "Abuelo", "Esposa", "Prima"), 0),
+                Question("¿Cómo se dice \"Esposo\"?", listOf("Wife", "Husband", "Uncle", "Child"), 1),
+                Question("Traduce: \"My parents live here\"", listOf("Mis padres viven aquí", "Mis amigos viven aquí", "Mis padres trabajan aquí", "Mis primos viven aquí"), 0),
+                Question("¿Qué significa \"Children\"?", listOf("Padres", "Hijos", "Hermanos", "Sobrinos"), 1),
+                Question("Traduce al inglés: \"Mi abuelo es mayor\"", type = "write", answer = "my grandfather is old|my grandpa is old")
+            )
+        ),
+        Lesson(
+            id = "emociones",
+            title = "Emociones",
+            description = "Sentimientos y estados de ánimo (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Angry\"?", listOf("Enojado", "Feliz", "Cansado", "Asustado"), 0),
+                Question("¿Cómo se dice \"Cansado\"?", listOf("Tired", "Hungry", "Thirsty", "Sleepy"), 0),
+                Question("Traduce: \"I am happy today\"", listOf("Estoy feliz hoy", "Estoy triste hoy", "Estoy cansado hoy", "Estaba feliz hoy"), 0),
+                Question("¿Qué significa \"Scared\"?", listOf("Asustado", "Sorprendido", "Triste", "Aburrido"), 0),
+                Question("Traduce al inglés: \"Estoy triste\"", type = "write", answer = "i am sad|im sad")
+            )
+        ),
+        Lesson(
+            id = "naturaleza",
+            title = "Naturaleza",
+            description = "Plantas y paisajes (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Tree\"?", listOf("Flor", "Árbol", "Río", "Hoja"), 1),
+                Question("¿Cómo se dice \"Montaña\"?", listOf("Mountain", "River", "Beach", "Lake"), 0),
+                Question("Traduce: \"The river is long\"", listOf("El río es largo", "El río es corto", "El río es ancho", "La montaña es larga"), 0),
+                Question("¿Qué significa \"Flower\"?", listOf("Árbol", "Hoja", "Flor", "Planta"), 2),
+                Question("Traduce al inglés: \"El árbol es verde\"", type = "write", answer = "the tree is green")
+            )
+        ),
+        Lesson(
+            id = "tecnologia",
+            title = "Tecnología",
+            description = "Teléfonos y computadoras (avanzado)",
+            questions = listOf(
+                Question("¿Cómo se dice \"Teléfono\"?", listOf("Phone", "Computer", "Keyboard", "Screen"), 0),
+                Question("¿Qué significa \"Screen\"?", listOf("Teclado", "Pantalla", "Ratón", "Cable"), 1),
+                Question("Traduce: \"I send an email\"", listOf("Envío un correo", "Recibo un correo", "Borro un correo", "Leo un correo"), 0),
+                Question("¿Qué significa \"Charger\"?", listOf("Cargador", "Audífonos", "Batería", "Cable"), 0),
+                Question("Traduce al inglés: \"Mi teléfono es nuevo\"", type = "write", answer = "my phone is new|my telephone is new")
+            )
+        ),
+        Lesson(
+            id = "medico",
+            title = "En el médico",
+            description = "Salud y síntomas (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Medicine\"?", listOf("Doctor", "Medicina", "Dolor", "Fiebre"), 1),
+                Question("¿Cómo se dice \"Fiebre\"?", listOf("Cough", "Fever", "Pain", "Cold"), 1),
+                Question("Traduce: \"Tengo dolor de cabeza\"", listOf("I have a headache", "I have a stomachache", "I have a cold", "I have a fever"), 0),
+                Question("¿Qué significa \"Pill\"?", listOf("Pastilla", "Jarabe", "Inyección", "Vendaje"), 0),
+                Question("Traduce al inglés: \"Tengo fiebre\"", type = "write", answer = "i have a fever|i have fever")
+            )
+        ),
+        Lesson(
+            id = "celebraciones",
+            title = "Celebraciones",
+            description = "Fiestas y cumpleaños (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Birthday\"?", listOf("Cumpleaños", "Boda", "Fiesta", "Regalo"), 0),
+                Question("¿Cómo se dice \"Pastel\"?", listOf("Cake", "Candy", "Balloon", "Card"), 0),
+                Question("Traduce: \"Happy birthday to you\"", listOf("Feliz cumpleaños", "Feliz año nuevo", "Felicidades por todo", "Buen provecho"), 0),
+                Question("¿Qué significa \"Gift\"?", listOf("Regalo", "Globos", "Invitados", "Música"), 0),
+                Question("Traduce al inglés: \"Feliz cumpleaños\"", type = "write", answer = "happy birthday|happy birthday to you")
+            )
         )
     )
 }
