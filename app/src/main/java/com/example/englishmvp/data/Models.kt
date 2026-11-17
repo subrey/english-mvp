@@ -109,6 +109,54 @@ object LessonRepository {
                 Question("¿Cómo se dice \"¿Cuánto cuesta?\"?", listOf("What time is it?", "Where is it?", "How old are you?", "How much is it?"), 3),
                 Question("Traduce al inglés: \"Mucho gusto\"", type = "write", answer = "nice to meet you|pleased to meet you")
             )
+        ),
+        Lesson(
+            id = "verbos2",
+            title = "Verbos 2",
+            description = "Más acciones comunes",
+            questions = listOf(
+                Question("¿Qué significa \"To run\"?", listOf("Caminar", "Correr", "Saltar", "Nadar"), 1),
+                Question("¿Cómo se dice \"Dormir\"?", listOf("To eat", "To drink", "To sleep", "To work"), 2),
+                Question("Traduce: \"She writes a letter\"", listOf("Ella lee una carta", "Ella escribe una carta", "Ella envía una carta", "Ella borra una carta"), 1),
+                Question("¿Qué significa \"To speak\"?", listOf("Hablar", "Escuchar", "Ver", "Pensar"), 0),
+                Question("Traduce al inglés: \"Yo hablo español\"", type = "write", answer = "i speak spanish|im speak spanish")
+            )
+        ),
+        Lesson(
+            id = "adjetivos",
+            title = "Adjetivos",
+            description = "Describir cosas y personas",
+            questions = listOf(
+                Question("¿Qué significa \"Big\"?", listOf("Pequeño", "Grande", "Rápido", "Feliz"), 1),
+                Question("¿Cómo se dice \"Feliz\"?", listOf("Sad", "Angry", "Happy", "Tired"), 2),
+                Question("El opuesto de \"Small\" es...", listOf("Little", "Short", "Big", "Tiny"), 2),
+                Question("¿Qué significa \"Fast\"?", listOf("Lento", "Rápido", "Fuerte", "Frío"), 1),
+                Question("Traduce al inglés: \"El perro es grande\"", type = "write", answer = "the dog is big|the dog is large")
+            )
+        ),
+        Lesson(
+            id = "tiempo",
+            title = "El tiempo",
+            description = "Clima y estaciones",
+            questions = listOf(
+                Question("¿Qué significa \"Rain\"?", listOf("Sol", "Lluvia", "Viento", "Nieve"), 1),
+                Question("¿Cómo se dice \"Frío\"?", listOf("Hot", "Warm", "Cold", "Cool"), 2),
+                Question("Traduce: \"The sun is hot\"", listOf("La luna es caliente", "El sol es caliente", "El sol está alto", "La arena es caliente"), 1),
+                Question("¿Qué significa \"Snow\"?", listOf("Lluvia", "Tormenta", "Nieve", "Niebla"), 2),
+                Question("Traduce al inglés: \"Hace calor\"", type = "write", answer = "it is hot|its hot")
+            )
+        ),
+        Lesson(
+            id = "ropa",
+            title = "Ropa",
+            description = "Prendas de vestir",
+            questions = listOf(
+                Question("¿Cómo se dice \"Camisa\"?", listOf("Shoes", "Shirt", "Skirt", "Socks"), 1),
+                Question("¿Qué significa \"Shoes\"?", listOf("Sombrero", "Zapatos", "Pantalones", "Chaqueta"), 1),
+                Question("Traduce: \"I need new shoes\"", listOf("Necesito zapatos nuevos", "Quiero una camisa nueva", "Necesito una bufanda", "Compré zapatos nuevos"), 0),
+                Question("¿Cómo se dice \"Sombrero\"?", listOf("Hat", "Glove", "Belt", "Scarf"), 0),
+                Question("Traduce al inglés: \"Tengo un sombrero azul\"", type = "write", answer = "i have a blue hat|ive got a blue hat")
+            )
         )
     )
 }
