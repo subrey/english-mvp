@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.englishmvp.data.LessonRepository
 import com.example.englishmvp.data.ProgressStore
+import com.example.englishmvp.data.SongRepository
 import com.example.englishmvp.ui.HomeScreen
 import com.example.englishmvp.ui.LessonScreen
 import com.example.englishmvp.ui.ResultScreen
