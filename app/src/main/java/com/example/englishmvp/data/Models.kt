@@ -265,6 +265,102 @@ object LessonRepository {
                 Question("¿Qué significa \"To buy\"?", listOf("Vender", "Comprar", "Pagar", "Preguntar"), 1),
                 Question("Traduce al inglés: \"¿Cuánto cuesta esto?\"", type = "write", answer = "how much is this|how much does this cost|how much does it cost")
             )
+        ),
+        Lesson(
+            id = "pasado",
+            title = "Pasado simple",
+            description = "Verbos en pasado (avanzado)",
+            questions = listOf(
+                Question("¿Cuál es el pasado de \"eat\"?", listOf("Eated", "Ate", "Eats", "Eaten"), 1),
+                Question("¿Cuál es el pasado de \"see\"?", listOf("Seed", "Saw", "Seen", "See"), 1),
+                Question("Traduce: \"Ayer fui al cine\"", listOf("I went to the cinema", "I go to the cinema", "I will go to the cinema", "I was the cinema"), 0),
+                Question("¿Cuál es el pasado de \"do\"?", listOf("Does", "Did", "Done", "Doing"), 1),
+                Question("Traduce al inglés: \"Ayer comí pizza\"", type = "write", answer = "i ate pizza yesterday|yesterday i ate pizza")
+            )
+        ),
+        Lesson(
+            id = "futuro",
+            title = "Futuro",
+            description = "Will y going to (avanzado)",
+            questions = listOf(
+                Question("Traduce: \"I will travel tomorrow\"", listOf("Viajaré mañana", "Viajé ayer", "Viajo mañana", "Viajaba mañana"), 0),
+                Question("Completa: She ___ go to school tomorrow.", listOf("will", "was", "is", "did"), 0),
+                Question("¿Qué significa \"going to\"?", listOf("Pasado", "Ir a (futuro planeado)", "Gerundio", "Condicional"), 1),
+                Question("Traduce: \"Will you come?\"", listOf("¿Vendrás?", "¿Viniste?", "¿Vienes siempre?", "¿De dónde vienes?"), 0),
+                Question("Traduce al inglés: \"Mañana lloverá\"", type = "write", answer = "it will rain tomorrow|tomorrow it will rain")
+            )
+        ),
+        Lesson(
+            id = "comparativos",
+            title = "Comparativos",
+            description = "Más... que (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Bigger\"?", listOf("Más grande", "El más grande", "Más pequeño", "Tan grande como"), 0),
+                Question("¿Cuál es el comparativo de \"good\"?", listOf("Gooder", "Better", "More good", "Best"), 1),
+                Question("Traduce: \"She is taller than me\"", listOf("Ella es más alta que yo", "Ella es tan alta como yo", "Ella es la más alta", "Yo soy más alto"), 0),
+                Question("\"Worse\" es el comparativo de...", listOf("Bad", "Good", "Small", "Easy"), 0),
+                Question("Traduce al inglés: \"Este libro es mejor\"", type = "write", answer = "this book is better|this book is the better")
+            )
+        ),
+        Lesson(
+            id = "preposiciones",
+            title = "Preposiciones",
+            description = "In, on, at, under (avanzado)",
+            questions = listOf(
+                Question("Completa: The book is ___ the table.", listOf("on", "in", "at", "of"), 0),
+                Question("¿Qué significa \"under\"?", listOf("Sobre", "Debajo de", "Dentro de", "Entre"), 1),
+                Question("Completa: I live ___ Mexico.", listOf("in", "on", "at", "to"), 0),
+                Question("Traduce: \"El gato está debajo de la mesa\"", listOf("The cat is under the table", "The cat is on the table", "The cat is in the table", "The table is under the cat"), 0),
+                Question("Traduce al inglés: \"Estoy en casa\"", type = "write", answer = "i am at home|im at home|i am home")
+            )
+        ),
+        Lesson(
+            id = "preguntas",
+            title = "Palabras de pregunta",
+            description = "What, who, where, why (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Why\"?", listOf("Quién", "Por qué", "Cuándo", "Dónde"), 1),
+                Question("¿Qué palabra se usa para preguntar por una persona?", listOf("What", "Who", "When", "How"), 1),
+                Question("Traduce: \"Why are you sad?\"", listOf("¿Por qué estás triste?", "¿Qué estás triste?", "¿Cuándo estás triste?", "¿Dónde estás triste?"), 0),
+                Question("¿Qué significa \"How many\"?", listOf("¿Cómo?", "¿Cuántos? (cosas contables)", "¿Qué tan?", "¿Quiénes?"), 1),
+                Question("Traduce al inglés: \"¿Dónde vives?\"", type = "write", answer = "where do you live|where do you live?")
+            )
+        ),
+        Lesson(
+            id = "conectores",
+            title = "Conectores",
+            description = "And, but, because, or (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"because\"?", listOf("Pero", "Porque", "Y", "O"), 1),
+                Question("Completa: I like tea ___ not coffee.", listOf("but", "and", "or", "so"), 0),
+                Question("Traduce: \"Estudio porque quiero aprender\"", listOf("I study because I want to learn", "I study and I want to learn", "I study but I want to learn", "I want to learn but I study"), 0),
+                Question("¿Qué significa \"or\"?", listOf("Y", "O", "Pero", "Porque"), 1),
+                Question("Traduce al inglés: \"Yo trabajo y estudio\"", type = "write", answer = "i work and study|i work and i study")
+            )
+        ),
+        Lesson(
+            id = "viajes",
+            title = "Viajes",
+            description = "Aeropuerto y vuelos (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Flight\"?", listOf("Tren", "Vuelo", "Equipaje", "Pasaporte"), 1),
+                Question("¿Cómo se dice \"Equipaje\"?", listOf("Ticket", "Luggage", "Passport", "Seat"), 1),
+                Question("Traduce: \"Where is the airport?\"", listOf("¿Dónde está el aeropuerto?", "¿Dónde está el avión?", "¿Cuándo sale el avión?", "¿Dónde está el avión nuevo?"), 0),
+                Question("¿Qué significa \"Ticket\"?", listOf("Boleto", "Pasaporte", "Maleta", "Asiento"), 0),
+                Question("Traduce al inglés: \"Necesito un boleto\"", type = "write", answer = "i need a ticket")
+            )
+        ),
+        Lesson(
+            id = "restaurante",
+            title = "Restaurante",
+            description = "Pedir comida (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Menu\"?", listOf("Cuenta", "Carta / menú", "Mesero", "Comida"), 1),
+                Question("¿Cómo se dice \"La cuenta, por favor\"?", listOf("The menu, please", "The bill, please", "The waiter, please", "The food, please"), 1),
+                Question("Traduce: \"I would like water\"", listOf("Quiero agua", "Me gusta el agua", "Bebo agua", "Necesito una botella"), 0),
+                Question("¿Qué significa \"Waiter\"?", listOf("Mesero", "Cocinero", "Cliente", "Jefe"), 0),
+                Question("Traduce al inglés: \"La cuenta, por favor\"", type = "write", answer = "the bill please|the check please|can i have the bill")
+            )
         )
     )
 }
