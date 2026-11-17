@@ -15,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import com.example.englishmvp.data.Lesson
 import com.example.englishmvp.data.LessonRepository
 import com.example.englishmvp.data.Question
+import com.example.englishmvp.data.Song
+import com.example.englishmvp.data.SongRepository
 import com.example.englishmvp.data.SoundHelper
 import com.example.englishmvp.data.TtsHelper
 
@@ -33,7 +35,38 @@ private fun isAnswerCorrect(q: Question, selected: Int?, written: String): Boole
         selected == q.correctIndex
 
 @Composable
-fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLesson: (String) -> Unit, onReset: () -> Unit) {
+fun SongScreen(song: com.example.englishmvp.data.Song, onBack: () -> Unit) {
+    val context = LocalContext.current
+    val tts = remember { TtsHelper(context) }
+    DisposableEffect(Unit) { onDispose { tts.shutdown() } }
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            TextButton(onClick = onBack) { Text("←") }
+            Text(song.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        }
+        Spacer(Modifier.height(8.dp))
+        Text("Toca 🔊 para escuchar cada línea en inglés", style = MaterialTheme.typography.bodySmall)
+        Spacer(Modifier.height(12.dp))
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+            items(song.lines.size) { i ->
+                val line = song.lines[i]
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(12.dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(line.english, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+                            IconButton(onClick = { tts.speak(line.english) }) { Text("🔊") }
+                        }
+                        Text(line.spanish, style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLesson: (String) -> Unit, onOpenSong: (String) -> Unit, onReset: () -> Unit) {
     val allDone = LessonRepository.lessons.all { completed[it.id] == true }
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         if (allDone) {
@@ -60,6 +93,9 @@ fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLess
         }
         Spacer(Modifier.height(16.dp))
         LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            item {
+                Text("📚 Lecciones", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            }
             itemsIndexed(LessonRepository.lessons) { i, lesson ->
                 val done = completed[lesson.id] == true
                 val unlocked = i == 0 || completed[LessonRepository.lessons[i - 1].id] == true
@@ -99,6 +135,25 @@ fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLess
                                 },
                                 style = MaterialTheme.typography.bodySmall
                             )
+                        }
+                    }
+                }
+            }
+            item {
+                Spacer(Modifier.height(8.dp))
+                Text("🎵 Canciones", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            }
+            items(SongRepository.songs) { song ->
+                Card(onClick = { onOpenSong(song.id) }, modifier = Modifier.fillMaxWidth()) {
+                    Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier.size(52.dp).background(MaterialTheme.colorScheme.tertiaryContainer, CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) { Text("🎵", style = MaterialTheme.typography.titleLarge) }
+                        Spacer(Modifier.width(12.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text(song.title, style = MaterialTheme.typography.titleMedium)
+                            Text("Letra con pronunciación y traducción", style = MaterialTheme.typography.bodySmall)
                         }
                     }
                 }

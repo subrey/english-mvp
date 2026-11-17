@@ -14,6 +14,7 @@ import com.example.englishmvp.data.ProgressStore
 import com.example.englishmvp.ui.HomeScreen
 import com.example.englishmvp.ui.LessonScreen
 import com.example.englishmvp.ui.ResultScreen
+import com.example.englishmvp.ui.SongScreen
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -35,7 +36,9 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(navController = nav, startDestination = "home") {
                         composable("home") {
-                            HomeScreen(xp = xp, completed = completed, streak = streak, onOpenLesson = { nav.navigate("lesson/$it") },
+                            HomeScreen(xp = xp, completed = completed, streak = streak,
+                                onOpenLesson = { nav.navigate("lesson/$it") },
+                                onOpenSong = { nav.navigate("song/$it") },
                                 onReset = { scope.launch { store.resetAll() } })
                         }
                         composable("lesson/{id}") { backStack ->
@@ -57,6 +60,11 @@ class MainActivity : ComponentActivity() {
                             if (r != null) ResultScreen(r.first, r.second, r.third) {
                                 nav.navigate("home") { popUpTo("home") { inclusive = true } }
                             }
+                        }
+                        composable("song/{id}") { backStack ->
+                            val id = backStack.arguments?.getString("id") ?: return@composable
+                            val song = SongRepository.songs.find { it.id == id } ?: return@composable
+                            SongScreen(song = song, onBack = { nav.popBackStack() })
                         }
                     }
                 }

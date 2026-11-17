@@ -15,6 +15,84 @@ data class Lesson(
     val questions: List<Question>
 )
 
+data class SongLine(val english: String, val spanish: String)
+
+data class Song(
+    val id: String,
+    val title: String,
+    val lines: List<SongLine>
+)
+
+object SongRepository {
+    val songs: List<Song> = listOf(
+        Song(
+            id = "twinkle",
+            title = "Twinkle, Twinkle, Little Star",
+            lines = listOf(
+                SongLine("Twinkle, twinkle, little star", "Brilla, brilla, estrellita"),
+                SongLine("How I wonder what you are", "Me pregunto qué serás"),
+                SongLine("Up above the world so high", "Tan arriba en el cielo"),
+                SongLine("Like a diamond in the sky", "Como un diamante en el cielo"),
+                SongLine("Twinkle, twinkle, little star", "Brilla, brilla, estrellita"),
+                SongLine("How I wonder what you are", "Me pregunto qué serás")
+            )
+        ),
+        Song(
+            id = "birthday",
+            title = "Happy Birthday",
+            lines = listOf(
+                SongLine("Happy birthday to you", "Feliz cumpleaños a ti"),
+                SongLine("Happy birthday to you", "Feliz cumpleaños a ti"),
+                SongLine("Happy birthday, dear friend", "Feliz cumpleaños, querido amigo"),
+                SongLine("Happy birthday to you", "Feliz cumpleaños a ti")
+            )
+        ),
+        Song(
+            id = "rowboat",
+            title = "Row, Row, Row Your Boat",
+            lines = listOf(
+                SongLine("Row, row, row your boat", "Rema, rema, rema tu bote"),
+                SongLine("Gently down the stream", "Suavemente por la corriente"),
+                SongLine("Merrily, merrily, merrily, merrily", "Alegremente, alegremente"),
+                SongLine("Life is but a dream", "La vida es solo un sueño")
+            )
+        ),
+        Song(
+            id = "macdonald",
+            title = "Old MacDonald Had a Farm",
+            lines = listOf(
+                SongLine("Old MacDonald had a farm", "El viejo MacDonald tenía una granja"),
+                SongLine("E-I-E-I-O", "E-I-E-I-O"),
+                SongLine("And on his farm he had a cow", "Y en su granja tenía una vaca"),
+                SongLine("E-I-E-I-O", "E-I-E-I-O"),
+                SongLine("With a moo-moo here and a moo-moo there", "Con un muu aquí y un muu allá"),
+                SongLine("Here a moo, there a moo, everywhere a moo-moo", "Aquí un muu, allá un muu, por todas partes muu-muu"),
+                SongLine("Old MacDonald had a farm, E-I-E-I-O", "El viejo MacDonald tenía una granja, E-I-E-I-O")
+            )
+        ),
+        Song(
+            id = "happy",
+            title = "If You're Happy and You Know It",
+            lines = listOf(
+                SongLine("If you're happy and you know it, clap your hands", "Si estás feliz y lo sabes, aplaude así"),
+                SongLine("If you're happy and you know it, clap your hands", "Si estás feliz y lo sabes, aplaude así"),
+                SongLine("If you're happy and you know it, and you really want to show it", "Si estás feliz y lo sabes, y de verdad lo quieres mostrar"),
+                SongLine("If you're happy and you know it, clap your hands", "Si estás feliz y lo sabes, aplaude así")
+            )
+        ),
+        Song(
+            id = "wheels",
+            title = "The Wheels on the Bus",
+            lines = listOf(
+                SongLine("The wheels on the bus go round and round", "Las ruedas del autobús giran y giran"),
+                SongLine("Round and round, round and round", "Giran y giran, giran y giran"),
+                SongLine("The wheels on the bus go round and round", "Las ruedas del autobús giran y giran"),
+                SongLine("All through the town", "Por todo el pueblo")
+            )
+        )
+    )
+}
+
 object LessonRepository {
     val lessons: List<Lesson> = listOf(
         Lesson(
@@ -528,6 +606,90 @@ object LessonRepository {
                 Question("Traduce: \"Would you like some tea?\"", listOf("¿Quieres té?", "¿Te gusta el té?", "¿Hay té?", "¿Es té?"), 0),
                 Question("¿Cómo se dice \"Con permiso\"?", listOf("Excuse me", "Sorry", "Please", "Thanks"), 0),
                 Question("Traduce al inglés: \"Por favor\"", type = "write", answer = "please")
+            )
+        ),
+        Lesson(
+            id = "salvajes",
+            title = "Animales salvajes",
+            description = "Animales de la selva",
+            questions = listOf(
+                Question("¿Qué significa \"Lion\"?", listOf("León", "Tigre", "Oso", "Lobo"), 0),
+                Question("¿Cómo se dice \"Tigre\"?", listOf("Lion", "Wolf", "Tiger", "Bear"), 2),
+                Question("Traduce: \"The lion is the king\"", listOf("El león es el rey", "El tigre es el rey", "El león es fuerte", "El rey es un león"), 0),
+                Question("¿Qué significa \"Monkey\"?", listOf("Mono", "Elefante", "Jirafa", "Cebra"), 0),
+                Question("Traduce al inglés: \"El tigre es rápido\"", type = "write", answer = "the tiger is fast|the tiger is quick")
+            )
+        ),
+        Lesson(
+            id = "playa",
+            title = "En la playa",
+            description = "Vacaciones en la playa",
+            questions = listOf(
+                Question("¿Qué significa \"Sand\"?", listOf("Arena", "Olas", "Sombrilla", "Concha"), 0),
+                Question("¿Cómo se dice \"Sombrilla\"?", listOf("Umbrella", "Sunscreen", "Towel", "Bucket"), 0),
+                Question("Traduce: \"I swim in the sea\"", listOf("Nado en el mar", "Nado en la piscina", "Veo el mar", "Voy al mar"), 0),
+                Question("¿Qué significa \"Wave\"?", listOf("Ola", "Arena", "Sol", "Barco"), 0),
+                Question("Traduce al inglés: \"La playa es hermosa\"", type = "write", answer = "the beach is beautiful|the beach is pretty")
+            )
+        ),
+        Lesson(
+            id = "musica",
+            title = "Música",
+            description = "Instrumentos y canciones",
+            questions = listOf(
+                Question("¿Qué significa \"Song\"?", listOf("Canción", "Banda", "Disco", "Baile"), 0),
+                Question("¿Cómo se dice \"Batería\" (instrumento)?", listOf("Drums", "Guitar", "Piano", "Flute"), 0),
+                Question("Traduce: \"I listen to music\"", listOf("Escucho música", "Toco música", "Veo música", "Compro música"), 0),
+                Question("¿Qué significa \"To sing\"?", listOf("Cantar", "Bailar", "Tocar", "Escuchar"), 0),
+                Question("Traduce al inglés: \"Me gusta esta canción\"", type = "write", answer = "i like this song")
+            )
+        ),
+        Lesson(
+            id = "estaciones",
+            title = "Estaciones del año",
+            description = "Seasons (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Spring\"?", listOf("Primavera", "Verano", "Otoño", "Invierno"), 0),
+                Question("¿Cómo se dice \"Verano\"?", listOf("Summer", "Winter", "Autumn", "Spring"), 0),
+                Question("Traduce: \"In winter it is cold\"", listOf("En invierno hace frío", "En invierno hace calor", "En verano hace frío", "El invierno es corto"), 0),
+                Question("¿Qué significa \"Autumn / Fall\"?", listOf("Otoño", "Primavera", "Noche", "Semana"), 0),
+                Question("Traduce al inglés: \"El verano es caliente\"", type = "write", answer = "summer is hot|the summer is hot")
+            )
+        ),
+        Lesson(
+            id = "verbos3",
+            title = "Verbos 3",
+            description = "Verbos útiles del día a día (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"To get up\"?", listOf("Levantarse", "Acostarse", "Sentarse", "Levantar objetos"), 0),
+                Question("¿Cómo se dice \"Olvidar\"?", listOf("To forget", "To remember", "To leave", "To lose"), 0),
+                Question("Traduce: \"I always forget names\"", listOf("Siempre olvido los nombres", "Nunca olvido los nombres", "Siempre recuerdo los nombres", "Olvidé tu nombre"), 0),
+                Question("¿Qué significa \"To try\"?", listOf("Intentar", "Tirar", "Ganar", "Perder"), 0),
+                Question("Traduce al inglés: \"Recuerdo tu nombre\"", type = "write", answer = "i remember your name")
+            )
+        ),
+        Lesson(
+            id = "escuela2",
+            title = "Escuela 2",
+            description = "Útiles escolares (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Backpack\"?", listOf("Mochila", "Pizarra", "Borrador", "Lápiz"), 0),
+                Question("¿Cómo se dice \"Borrador\"?", listOf("Eraser", "Marker", "Notebook", "Ruler"), 0),
+                Question("Traduce: \"The teacher writes on the board\"", listOf("El maestro escribe en el pizarrón", "El maestro borra el pizarrón", "El alumno escribe en el pizarrón", "El maestro lee el pizarrón"), 0),
+                Question("¿Qué significa \"Ruler\"?", listOf("Regla", "Tijeras", "Grapas", "Pegamento"), 0),
+                Question("Traduce al inglés: \"Abro mi mochila\"", type = "write", answer = "i open my backpack")
+            )
+        ),
+        Lesson(
+            id = "cocina",
+            title = "En la cocina",
+            description = "Verbos de cocinar (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"To boil\"?", listOf("Hervir", "Freír", "Cortar", "Mezclar"), 0),
+                Question("¿Cómo se dice \"Cuchillo\"?", listOf("Knife", "Fork", "Spoon", "Plate"), 0),
+                Question("Traduce: \"Cut the onion\"", listOf("Corta la cebolla", "Pela la cebolla", "Compra la cebolla", "Corta el pan"), 0),
+                Question("¿Qué significa \"To bake\"?", listOf("Hornear", "Picar", "Hervir", "Servir"), 0),
+                Question("Traduce al inglés: \"Mezcla el agua y la sal\"", type = "write", answer = "mix the water and the salt|mix water and salt")
             )
         )
     )
