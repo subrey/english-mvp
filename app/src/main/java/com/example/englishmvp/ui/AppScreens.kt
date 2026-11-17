@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.englishmvp.data.Lesson
 import com.example.englishmvp.data.LessonRepository
 import com.example.englishmvp.data.Question
+import com.example.englishmvp.data.SoundHelper
 import com.example.englishmvp.data.TtsHelper
 
 private fun normalize(s: String): String =
@@ -103,7 +104,13 @@ fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Uni
     val q = lesson.questions[index]
     val context = LocalContext.current
     val tts = remember { TtsHelper(context) }
-    DisposableEffect(Unit) { onDispose { tts.shutdown() } }
+    val sounds = remember { SoundHelper() }
+    DisposableEffect(Unit) {
+        onDispose {
+            tts.shutdown()
+            sounds.release()
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         LinearProgressIndicator(
@@ -145,7 +152,14 @@ fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Uni
 
         Spacer(Modifier.weight(1f))
         LaunchedEffect(index, answered) {
-            if (answered && correctNow) tts.speak(correctTextOf(q))
+            if (answered) {
+                if (correctNow) {
+                    sounds.success()
+                    tts.speak(correctTextOf(q))
+                } else {
+                    sounds.error()
+                }
+            }
         }
         if (answered) {
             if (correctNow) {
