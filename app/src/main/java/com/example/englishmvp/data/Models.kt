@@ -445,6 +445,90 @@ object LessonRepository {
                 Question("¿Qué significa \"Gift\"?", listOf("Regalo", "Globos", "Invitados", "Música"), 0),
                 Question("Traduce al inglés: \"Feliz cumpleaños\"", type = "write", answer = "happy birthday|happy birthday to you")
             )
+        ),
+        Lesson(
+            id = "frutas",
+            title = "Frutas y verduras",
+            description = "En el mercado",
+            questions = listOf(
+                Question("¿Qué significa \"Strawberry\"?", listOf("Fresa", "Melón", "Uva", "Durazno"), 0),
+                Question("¿Cómo se dice \"Cebolla\"?", listOf("Onion", "Garlic", "Carrot", "Pepper"), 0),
+                Question("Traduce: \"I eat vegetables every day\"", listOf("Como verduras todos los días", "Como frutas todos los días", "Compro verduras todos los días", "Como verduras hoy"), 0),
+                Question("¿Qué significa \"Lemon\"?", listOf("Limón", "Lima", "Mango", "Piña"), 0),
+                Question("Traduce al inglés: \"Me gusta la manzana\"", type = "write", answer = "i like apples|i like the apple|i like apple")
+            )
+        ),
+        Lesson(
+            id = "transporte",
+            title = "Transporte",
+            description = "Cómo viajar",
+            questions = listOf(
+                Question("¿Qué significa \"Bus\"?", listOf("Bus", "Tren", "Bicicleta", "Camión de carga"), 0),
+                Question("¿Cómo se dice \"Tren\"?", listOf("Train", "Truck", "Tram", "Subway"), 0),
+                Question("Traduce: \"I go to work by bus\"", listOf("Voy al trabajo en autobús", "Voy al trabajo a pie", "Voy al trabajo en tren", "Trabajo en el autobús"), 0),
+                Question("¿Qué significa \"Bicycle\"?", listOf("Motocicleta", "Bicicleta", "Patines", "Carro"), 1),
+                Question("Traduce al inglés: \"Voy en coche\"", type = "write", answer = "i go by car|i travel by car")
+            )
+        ),
+        Lesson(
+            id = "direcciones",
+            title = "Direcciones",
+            description = "Pedir y dar indicaciones",
+            questions = listOf(
+                Question("¿Qué significa \"Left\"?", listOf("Izquierda", "Derecha", "Recto", "Detrás"), 0),
+                Question("¿Cómo se dice \"Recto\"?", listOf("Straight", "Stop", "Back", "Side"), 0),
+                Question("Traduce: \"Turn right at the corner\"", listOf("Gira a la derecha en la esquina", "Gira a la izquierda en la esquina", "Sigue recto en la esquina", "Gira a la derecha cerca"), 0),
+                Question("¿Qué significa \"Near\"?", listOf("Cerca", "Lejos", "Entre", "Encima"), 0),
+                Question("Traduce al inglés: \"Gira a la izquierda\"", type = "write", answer = "turn left|turn to the left")
+            )
+        ),
+        Lesson(
+            id = "profesiones",
+            title = "Profesiones",
+            description = "Oficios y carreras",
+            questions = listOf(
+                Question("¿Qué significa \"Nurse\"?", listOf("Enfermero(a)", "Médico", "Policía", "Maestro"), 0),
+                Question("¿Cómo se dice \"Bombero\"?", listOf("Firefighter", "Fisherman", "Farmer", "Salesman"), 0),
+                Question("Traduce: \"She is an engineer\"", listOf("Ella es ingeniera", "Él es ingeniero", "Ella es profesora", "Ella es arquitecta"), 0),
+                Question("¿Qué significa \"Lawyer\"?", listOf("Abogado", "Contador", "Panadero", "Mecánico"), 0),
+                Question("Traduce al inglés: \"Soy maestro\"", type = "write", answer = "i am a teacher|im a teacher|i am teacher")
+            )
+        ),
+        Lesson(
+            id = "formas",
+            title = "Formas y tamaños",
+            description = "Figuras geométricas",
+            questions = listOf(
+                Question("¿Qué significa \"Circle\"?", listOf("Círculo", "Cuadrado", "Triángulo", "Línea"), 0),
+                Question("¿Cómo se dice \"Cuadrado\"?", listOf("Square", "Triangle", "Star", "Heart"), 0),
+                Question("Traduce: \"The box is square\"", listOf("La caja es cuadrada", "La caja es redonda", "La caja es grande", "El cuadrado es de caja"), 0),
+                Question("¿Qué significa \"Heart\"?", listOf("Corazón", "Estrella", "Media luna", "Flecha"), 0),
+                Question("Traduce al inglés: \"Es un círculo\"", type = "write", answer = "it is a circle|its a circle")
+            )
+        ),
+        Lesson(
+            id = "higiene",
+            title = "Higiene y aseo",
+            description = "Cuidado personal",
+            questions = listOf(
+                Question("¿Qué significa \"Toothbrush\"?", listOf("Cepillo de dientes", "Toalla", "Jabón", "Peine"), 0),
+                Question("¿Cómo se dice \"Jabón\"?", listOf("Soap", "Shampoo", "Towel", "Sponge"), 0),
+                Question("Traduce: \"I take a shower every morning\"", listOf("Me ducho cada mañana", "Me baño cada noche", "Me lavo cada mañana", "Me ducho en las mañanas de la semana"), 0),
+                Question("¿Qué significa \"Mirror\"?", listOf("Espejo", "Lavabo", "Toalla", "Tijeras"), 0),
+                Question("Traduce al inglés: \"Lavo mis manos\"", type = "write", answer = "i wash my hands")
+            )
+        ),
+        Lesson(
+            id = "cortesia",
+            title = "Cortesía",
+            description = "Frases educadas (avanzado)",
+            questions = listOf(
+                Question("¿Cómo se dice \"¿Me ayudas, por favor?\"?", listOf("Can you help me, please?", "Do you help me?", "You can help me?", "Help me now?"), 0),
+                Question("¿Qué significa \"You're welcome\"?", listOf("Bienvenido", "De nada", "Por favor", "Buena suerte"), 1),
+                Question("Traduce: \"Would you like some tea?\"", listOf("¿Quieres té?", "¿Te gusta el té?", "¿Hay té?", "¿Es té?"), 0),
+                Question("¿Cómo se dice \"Con permiso\"?", listOf("Excuse me", "Sorry", "Please", "Thanks"), 0),
+                Question("Traduce al inglés: \"Por favor\"", type = "write", answer = "please")
+            )
         )
     )
 }
