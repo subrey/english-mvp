@@ -691,6 +691,78 @@ object LessonRepository {
                 Question("¿Qué significa \"To bake\"?", listOf("Hornear", "Picar", "Hervir", "Servir"), 0),
                 Question("Traduce al inglés: \"Mezcla el agua y la sal\"", type = "write", answer = "mix the water and the salt|mix water and salt")
             )
+        ),
+        Lesson(
+            id = "conditionals",
+            title = "Condicionales",
+            description = "If... (avanzado)",
+            questions = listOf(
+                Question("Completa: ___ it rains, I stay home.", listOf("If", "When not", "Because", "So"), 0),
+                Question("Traduce: \"If you come, we eat together\"", listOf("Si vienes, comemos juntos", "Cuando vienes, comes solo", "Si vienes, cenas juntos", "Siempre comemos juntos"), 0),
+                Question("¿Qué significa \"unless\"?", listOf("A menos que / si no", "Porque", "Aunque", "Mientras"), 0),
+                Question("Completa: If I ___ rich, I would travel.", listOf("was be", "were", "will be", "am being"), 1),
+                Question("Traduce al inglés: \"Si tengo tiempo, te llamo\"", type = "write", answer = "if i have time i will call you|if i have time ill call you|if i have time i call you")
+            )
+        ),
+        Lesson(
+            id = "posesivos",
+            title = "Posesivos",
+            description = "My, your, his, hers... (avanzado)",
+            questions = listOf(
+                Question("Completa: This is ___ book. (de ella)", listOf("her", "hers", "she", "herself"), 0),
+                Question("¿Cuál es un pronombre posesivo?", listOf("Mine", "My", "Me", "Myself"), 0),
+                Question("Traduce: \"El coche es nuestro\"", listOf("The car is ours", "The car is our", "The car is us", "Our car is we"), 0),
+                Question("¿Qué significa \"theirs\"?", listOf("Suyo (de ellos)", "Tuyo", "Mío", "Nuestro"), 0),
+                Question("Traduce al inglés: \"Ese es mi perro\"", type = "write", answer = "that is my dog|thats my dog")
+            )
+        ),
+        Lesson(
+            id = "adverbios",
+            title = "Adverbios",
+            description = "Slowly, always, never... (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Never\"?", listOf("Nunca", "Siempre", "A veces", "Casi"), 0),
+                Question("¿Cómo se dice \"Rápidamente\"?", listOf("Slowly", "Quickly", "Loudly", "Softly"), 1),
+                Question("Completa: She ___ arrives late. (siempre)", listOf("always", "never", "sometimes", "rarely"), 0),
+                Question("Traduce: \"He speaks slowly\"", listOf("Él habla lentamente", "Él habla rápido", "Él escucha lentamente", "Él habla fuerte"), 0),
+                Question("Traduce al inglés: \"Yo nunca como carne\"", type = "write", answer = "i never eat meat")
+            )
+        ),
+        Lesson(
+            id = "phrasal",
+            title = "Verbos frasales",
+            description = "Turn on, put on... (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Turn on\"?", listOf("Encender", "Apagar", "Girar", "Volver"), 0),
+                Question("¿Cómo se dice \"Apagar\"?", listOf("Turn off", "Turn on", "Take off", "Get off"), 0),
+                Question("Traduce: \"Put on your coat\"", listOf("Ponte el abrigo", "Quítate el abrigo", "Lava el abrigo", "Compra un abrigo"), 0),
+                Question("¿Qué significa \"Take off\"?", listOf("Quitar (ropa) / despegar", "Ponerse", "Llevar", "Comprar"), 0),
+                Question("Traduce al inglés: \"Enciende la luz\"", type = "write", answer = "turn on the light|turn the light on")
+            )
+        ),
+        Lesson(
+            id = "clima",
+            title = "El clima",
+            description = "Describir el tiempo (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Cloudy\"?", listOf("Nublado", "Soleado", "Ventoso", "Húmedo"), 0),
+                Question("¿Cómo se dice \"Hace viento\"?", listOf("It is windy", "It is cloudy", "It is sunny", "It is raining"), 0),
+                Question("Traduce: \"It is raining cats and dogs\"", listOf("Llueve muy fuerte", "Caen gatos y perros", "Llueve un poco", "Está nublado"), 0),
+                Question("¿Qué significa \"Thunder\"?", listOf("Trueno", "Rayo", "Arcoíris", "Tormenta"), 0),
+                Question("Traduce al inglés: \"Está soleado hoy\"", type = "write", answer = "it is sunny today|its sunny today|it is sunny")
+            )
+        ),
+        Lesson(
+            id = "banco",
+            title = "En el banco",
+            description = "Dinero y cuentas (avanzado)",
+            questions = listOf(
+                Question("¿Qué significa \"Account\"?", listOf("Cuenta", "Tarjeta", "Préstamo", "Recibo"), 0),
+                Question("¿Cómo se dice \"Retirar dinero\"?", listOf("Withdraw money", "Deposit money", "Save money", "Count money"), 0),
+                Question("Traduce: \"I want to open an account\"", listOf("Quiero abrir una cuenta", "Quiero cerrar la cuenta", "Quiero un préstamo", "Quiero cambiar dinero"), 0),
+                Question("¿Qué significa \"Loan\"?", listOf("Préstamo", "Ahorro", "Interés", "Deuda"), 0),
+                Question("Traduce al inglés: \"Necesito retirar dinero\"", type = "write", answer = "i need to withdraw money")
+            )
         )
     )
 }
