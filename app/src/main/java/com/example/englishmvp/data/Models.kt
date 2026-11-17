@@ -157,6 +157,114 @@ object LessonRepository {
                 Question("¿Cómo se dice \"Sombrero\"?", listOf("Hat", "Glove", "Belt", "Scarf"), 0),
                 Question("Traduce al inglés: \"Tengo un sombrero azul\"", type = "write", answer = "i have a blue hat|ive got a blue hat")
             )
+        ),
+        Lesson(
+            id = "animales",
+            title = "Animales",
+            description = "Animales domésticos y salvajes",
+            questions = listOf(
+                Question("¿Qué significa \"Dog\"?", listOf("Gato", "Perro", "Pájaro", "Pez"), 1),
+                Question("¿Cómo se dice \"Caballo\"?", listOf("Cow", "Pig", "Horse", "Sheep"), 2),
+                Question("Traduce: \"The bird sings\"", listOf("El pájaro vuela", "El pájaro canta", "El pájaro come", "El pájaro duerme"), 1),
+                Question("¿Qué significa \"Cat\"?", listOf("Perro", "Caballo", "Gato", "Conejo"), 2),
+                Question("Traduce al inglés: \"Tengo un perro y un gato\"", type = "write", answer = "i have a dog and a cat|ive got a dog and a cat")
+            )
+        ),
+        Lesson(
+            id = "cuerpo",
+            title = "Cuerpo y salud",
+            description = "Partes del cuerpo",
+            questions = listOf(
+                Question("¿Qué significa \"Head\"?", listOf("Mano", "Cabeza", "Pie", "Rodilla"), 1),
+                Question("¿Cómo se dice \"Mano\"?", listOf("Foot", "Arm", "Hand", "Finger"), 2),
+                Question("Traduce: \"Me duele la cabeza\"", listOf("My hand hurts", "My head hurts", "My feet hurt", "My head is big"), 1),
+                Question("¿Qué significa \"Eye\"?", listOf("Ojo", "Oído", "Boca", "Nariz"), 0),
+                Question("Traduce al inglés: \"Necesito un doctor\"", type = "write", answer = "i need a doctor")
+            )
+        ),
+        Lesson(
+            id = "ciudad",
+            title = "Ciudad y lugares",
+            description = "Lugares de la ciudad",
+            questions = listOf(
+                Question("¿Qué significa \"Market\"?", listOf("Escuela", "Mercado", "Calle", "Parque"), 1),
+                Question("¿Cómo se dice \"Hospital\"?", listOf("Colegio", "Mercado", "Hospital", "Banco"), 2),
+                Question("Traduce: \"Where is the park?\"", listOf("¿Dónde está el parque?", "¿Dónde está el mercado?", "¿Cuándo es el parque?", "¿Qué es el parque?"), 0),
+                Question("¿Qué significa \"Street\"?", listOf("Avenida", "Calle", "Plaza", "Puente"), 1),
+                Question("Traduce al inglés: \"Voy al mercado\"", type = "write", answer = "i go to the market|im going to the market")
+            )
+        ),
+        Lesson(
+            id = "casa",
+            title = "Casa",
+            description = "Habitaciones y objetos",
+            questions = listOf(
+                Question("¿Qué significa \"Kitchen\"?", listOf("Sala", "Cocina", "Baño", "Dormitorio"), 1),
+                Question("¿Cómo se dice \"Ventana\"?", listOf("Door", "Window", "Chair", "Table"), 1),
+                Question("Traduce: \"La puerta está abierta\"", listOf("The door is open", "The window is open", "The door is closed", "The box is open"), 0),
+                Question("¿Qué significa \"Bed\"?", listOf("Mesa", "Silla", "Cama", "Armario"), 2),
+                Question("Traduce al inglés: \"Mi casa es pequeña\"", type = "write", answer = "my house is small|my home is small")
+            )
+        ),
+        Lesson(
+            id = "rutina",
+            title = "Rutina diaria",
+            description = "Acciones de cada día",
+            questions = listOf(
+                Question("¿Qué significa \"Wake up\"?", listOf("Dormirse", "Despertarse", "Ducharse", "Comer"), 1),
+                Question("¿Cómo se dice \"Desayunar\"?", listOf("To eat", "To have breakfast", "To lunch", "To dine"), 1),
+                Question("Traduce: \"I go to bed at ten\"", listOf("Me acuesto a las diez", "Voy a la cama nueva", "Duermo diez horas", "Me levanto a las diez"), 0),
+                Question("¿Qué significa \"Work\"?", listOf("Jugar", "Trabajar", "Estudiar", "Descansar"), 1),
+                Question("Traduce al inglés: \"Me despierto temprano\"", type = "write", answer = "i wake up early|i get up early")
+            )
+        ),
+        Lesson(
+            id = "trabajo",
+            title = "Trabajo y escuela",
+            description = "Estudio y oficios",
+            questions = listOf(
+                Question("¿Qué significa \"Teacher\"?", listOf("Estudiante", "Profesor(a)", "Doctor", "Policía"), 1),
+                Question("¿Cómo se dice \"Libro\"?", listOf("Book", "Pen", "Bag", "Paper"), 0),
+                Question("Traduce: \"I study every day\"", listOf("Estudio todos los días", "Trabajo todos los días", "Leo cada día", "Estudio por la mañana"), 0),
+                Question("¿Qué significa \"Office\"?", listOf("Fábrica", "Tienda", "Oficina", "Campo"), 2),
+                Question("Traduce al inglés: \"Yo trabajo mucho\"", type = "write", answer = "i work a lot|i work very much")
+            )
+        ),
+        Lesson(
+            id = "deportes",
+            title = "Deportes y pasatiempos",
+            description = "Hobbies y diversión",
+            questions = listOf(
+                Question("¿Qué significa \"Soccer\"?", listOf("Baloncesto", "Fútbol", "Tenis", "Béisbol"), 1),
+                Question("¿Cómo se dice \"Nadar\"?", listOf("To swim", "To run", "To climb", "To dance"), 0),
+                Question("Traduce: \"I like to play guitar\"", listOf("Me gusta tocar la guitarra", "Me gusta escuchar guitarra", "Me gusta la guitarra nueva", "Quiero una guitarra"), 0),
+                Question("¿Qué significa \"To read\"?", listOf("Escribir", "Leer", "Dibujar", "Cantar"), 1),
+                Question("Traduce al inglés: \"Me gusta el fútbol\"", type = "write", answer = "i like soccer|i like football")
+            )
+        ),
+        Lesson(
+            id = "fechas",
+            title = "Días y fechas",
+            description = "Días, meses y horas del día",
+            questions = listOf(
+                Question("¿Qué significa \"Monday\"?", listOf("Domingo", "Lunes", "Martes", "Miércoles"), 1),
+                Question("¿Qué significa \"Month\"?", listOf("Día", "Semana", "Mes", "Año"), 2),
+                Question("Traduce: \"Today is Friday\"", listOf("Hoy es viernes", "Mañana es viernes", "Hoy es lunes", "Ayer fue viernes"), 0),
+                Question("¿Cómo se dice \"Ayer\"?", listOf("Today", "Tomorrow", "Yesterday", "Now"), 2),
+                Question("Traduce al inglés: \"Hoy es lunes\"", type = "write", answer = "today is monday|it is monday today|today its monday")
+            )
+        ),
+        Lesson(
+            id = "compras",
+            title = "Compras y dinero",
+            description = "En la tienda",
+            questions = listOf(
+                Question("¿Qué significa \"Money\"?", listOf("Tienda", "Dinero", "Precio", "Cuenta"), 1),
+                Question("¿Cómo se dice \"Caro\"?", listOf("Cheap", "Expensive", "Free", "New"), 1),
+                Question("Traduce: \"Can I pay by card?\"", listOf("¿Puedo pagar con tarjeta?", "¿Puedo pagar en efectivo?", "¿Tienen tarjeta?", "¿Dónde pago?"), 0),
+                Question("¿Qué significa \"To buy\"?", listOf("Vender", "Comprar", "Pagar", "Preguntar"), 1),
+                Question("Traduce al inglés: \"¿Cuánto cuesta esto?\"", type = "write", answer = "how much is this|how much does this cost|how much does it cost")
+            )
         )
     )
 }
