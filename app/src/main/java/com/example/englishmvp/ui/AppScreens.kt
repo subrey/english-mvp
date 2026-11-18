@@ -67,7 +67,7 @@ fun SongScreen(song: com.example.englishmvp.data.Song, onBack: () -> Unit) {
 }
 
 @Composable
-fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLesson: (String) -> Unit, onOpenSong: (String) -> Unit, onReset: () -> Unit) {
+fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, failedCount: Int, onOpenLesson: (String) -> Unit, onOpenSong: (String) -> Unit, onOpenReview: () -> Unit, onReset: () -> Unit) {
     val allDone = LessonRepository.lessons.all { completed[it.id] == true }
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         if (allDone) {
@@ -85,6 +85,19 @@ fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLess
         }
         Text("Aprende inglés", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(8.dp))
+        if (failedCount > 0) {
+            Card(onClick = onOpenReview, modifier = Modifier.fillMaxWidth()) {
+                Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text("🔁", style = MaterialTheme.typography.headlineSmall)
+                    Spacer(Modifier.width(12.dp))
+                    Column {
+                        Text("Repasar errores", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("$failedCount preguntas falladas pendientes", style = MaterialTheme.typography.bodySmall)
+                    }
+                }
+            }
+            Spacer(Modifier.height(8.dp))
+        }
         Card(modifier = Modifier.fillMaxWidth()) {
             Column(Modifier.padding(16.dp)) {
                 Text("🔥 Racha: $streak ${if (streak == 1) "día" else "días"}   ·   XP total: $xp",
@@ -164,7 +177,7 @@ fun HomeScreen(xp: Int, completed: Map<String, Boolean>, streak: Int, onOpenLess
 }
 
 @Composable
-fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Unit) {
+fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Unit, onFail: (String) -> Unit = {}) {
     var index by remember { mutableIntStateOf(0) }
     var selected by remember { mutableStateOf<Int?>(null) }
     var textInput by remember { mutableStateOf("") }
@@ -250,7 +263,7 @@ fun LessonScreen(lesson: Lesson, onFinish: (Int, Int) -> Unit, onBack: () -> Uni
                 val ok = isAnswerCorrect(q, selected, textInput)
                 answered = true
                 correctNow = ok
-                if (ok) correctCount++
+                if (ok) correctCount++ else onFail("${lesson.id}:$index")
             }, enabled = if (q.type == "write") textInput.isNotBlank() else selected != null,
                 modifier = Modifier.fillMaxWidth()) { Text("Comprobar") }
         }
@@ -268,5 +281,115 @@ fun ResultScreen(correct: Int, total: Int, gainedXp: Int, onDone: () -> Unit) {
         Text("XP ganada: +$gainedXp", style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(24.dp))
         Button(onClick = onDone) { Text("Continuar") }
+    }
+}
+
+@Composable
+fun ReviewScreen(
+    questions: List<Pair<Lesson, Int>>,
+    onResolved: (String) -> Unit,
+    onExit: () -> Unit
+) {
+    var idx by remember { mutableIntStateOf(0) }
+    var selected by remember { mutableStateOf<Int?>(null) }
+    var textInput by remember { mutableStateOf("") }
+    var answered by remember { mutableStateOf(false) }
+    var correctNow by remember { mutableStateOf(false) }
+    var resolvedCount by remember { mutableIntStateOf(0) }
+    var finished by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val tts = remember { TtsHelper(context) }
+    val sounds = remember { SoundHelper() }
+    DisposableEffect(Unit) { onDispose { tts.shutdown(); sounds.release() } }
+
+    if (questions.isEmpty()) {
+        Column(modifier = Modifier.fillMaxSize().padding(24.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("🎉", style = MaterialTheme.typography.displayLarge)
+            Text("No tienes errores pendientes", style = MaterialTheme.typography.titleLarge)
+            Spacer(Modifier.height(16.dp))
+            Button(onClick = onExit) { Text("Volver") }
+        }
+        return
+    }
+
+    val queue = remember { questions.shuffled() }
+    if (finished) {
+        Column(modifier = Modifier.fillMaxSize().padding(24.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("✅", style = MaterialTheme.typography.displayLarge)
+            Text("Repaso terminado", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(12.dp))
+            Text("Corregiste $resolvedCount de ${queue.size} preguntas", style = MaterialTheme.typography.titleMedium)
+            Text("Las que fallaste seguirán pendientes para el próximo repaso", style = MaterialTheme.typography.bodyMedium)
+            Spacer(Modifier.height(24.dp))
+            Button(onClick = onExit) { Text("Volver") }
+        }
+        return
+    }
+
+    val (lesson, qIndex) = queue[idx]
+    val q = lesson.questions[qIndex]
+    val key = "${lesson.id}:$qIndex"
+
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Text("🔁 Repaso de errores", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Text("Pregunta ${idx + 1} de ${queue.size}")
+        Spacer(Modifier.height(16.dp))
+        Text(q.prompt, style = MaterialTheme.typography.headlineSmall)
+        Spacer(Modifier.height(16.dp))
+
+        if (q.type == "write") {
+            OutlinedTextField(
+                value = textInput,
+                onValueChange = { if (!answered) textInput = it },
+                label = { Text("Escribe en inglés") },
+                singleLine = true,
+                enabled = !answered,
+                modifier = Modifier.fillMaxWidth()
+            )
+        } else {
+            q.options.forEachIndexed { i, opt ->
+                val isCorrect = i == q.correctIndex
+                Row(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+                    when {
+                        answered && isCorrect -> Button(onClick = {}, modifier = Modifier.weight(1f), enabled = false) { Text(opt) }
+                        answered && selected == i -> Button(onClick = {}, modifier = Modifier.weight(1f),
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error), enabled = false) { Text(opt) }
+                        else -> OutlinedButton(onClick = { selected = i }, modifier = Modifier.weight(1f), enabled = !answered) { Text(opt) }
+                    }
+                    IconButton(onClick = { tts.speak(opt) }) { Text("🔊") }
+                }
+            }
+        }
+
+        Spacer(Modifier.weight(1f))
+        LaunchedEffect(idx, answered) {
+            if (answered) {
+                if (correctNow) { sounds.success(); tts.speak(correctTextOf(q)) } else sounds.error()
+            }
+        }
+        if (answered) {
+            if (correctNow) {
+                Text("¡Correcto! Ya no la verás en el repaso 🎉", color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            } else {
+                Text("Incorrecto ❌ Queda pendiente. La respuesta era: ${correctTextOf(q)}",
+                    color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.titleMedium)
+            }
+            Spacer(Modifier.height(8.dp))
+            Button(onClick = {
+                if (idx < queue.lastIndex) {
+                    idx++; selected = null; textInput = ""; answered = false; correctNow = false
+                } else finished = true
+            }, modifier = Modifier.fillMaxWidth()) { Text(if (idx < queue.lastIndex) "Siguiente" else "Terminar repaso") }
+        } else {
+            Button(onClick = {
+                val ok = isAnswerCorrect(q, selected, textInput)
+                answered = true
+                correctNow = ok
+                if (ok) { onResolved(key); resolvedCount++ }
+            }, enabled = if (q.type == "write") textInput.isNotBlank() else selected != null,
+                modifier = Modifier.fillMaxWidth()) { Text("Comprobar") }
+        }
+        TextButton(onClick = onExit, modifier = Modifier.align(Alignment.CenterHorizontally)) { Text("Salir") }
     }
 }

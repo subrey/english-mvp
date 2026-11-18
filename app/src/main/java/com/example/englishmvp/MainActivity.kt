@@ -15,6 +15,7 @@ import com.example.englishmvp.data.SongRepository
 import com.example.englishmvp.ui.HomeScreen
 import com.example.englishmvp.ui.LessonScreen
 import com.example.englishmvp.ui.ResultScreen
+import com.example.englishmvp.ui.ReviewScreen
 import com.example.englishmvp.ui.SongScreen
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,13 @@ class MainActivity : ComponentActivity() {
                     val scope = rememberCoroutineScope()
                     val xp by store.xp.collectAsState(initial = 0)
                     val streak by store.streak.collectAsState(initial = 0)
+                    val failed by store.failed.collectAsState(initial = emptySet<String>())
+                    val failedQuestions = failed.mapNotNull { key ->
+                        val parts = key.split(":")
+                        val lesson = LessonRepository.lessons.find { it.id == parts[0] }
+                        val qi = parts.getOrNull(1)?.toIntOrNull()
+                        if (lesson != null && qi != null && qi in lesson.questions.indices) lesson to qi else null
+                    }
                     val completed = LessonRepository.lessons.associate { lesson ->
                         val done by store.isCompleted(lesson.id).collectAsState(initial = false)
                         lesson.id to done
@@ -38,8 +46,10 @@ class MainActivity : ComponentActivity() {
                     NavHost(navController = nav, startDestination = "home") {
                         composable("home") {
                             HomeScreen(xp = xp, completed = completed, streak = streak,
+                                failedCount = failedQuestions.size,
                                 onOpenLesson = { nav.navigate("lesson/$it") },
                                 onOpenSong = { nav.navigate("song/$it") },
+                                onOpenReview = { nav.navigate("review") },
                                 onReset = { scope.launch { store.resetAll() } })
                         }
                         composable("lesson/{id}") { backStack ->
@@ -53,7 +63,8 @@ class MainActivity : ComponentActivity() {
                                     lastResult = Triple(correct, total, gained)
                                     nav.navigate("result") { popUpTo("home") }
                                 },
-                                onBack = { nav.popBackStack() }
+                                onBack = { nav.popBackStack() },
+                                onFail = { key -> scope.launch { store.addFailed(key) } }
                             )
                         }
                         composable("result") {
@@ -66,6 +77,13 @@ class MainActivity : ComponentActivity() {
                             val id = backStack.arguments?.getString("id") ?: return@composable
                             val song = SongRepository.songs.find { it.id == id } ?: return@composable
                             SongScreen(song = song, onBack = { nav.popBackStack() })
+                        }
+                        composable("review") {
+                            ReviewScreen(
+                                questions = failedQuestions,
+                                onResolved = { key -> scope.launch { store.removeFailed(key) } },
+                                onExit = { nav.popBackStack() }
+                            )
                         }
                     }
                 }

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -14,6 +15,7 @@ class ProgressStore(private val context: Context) {
     private val xpKey = intPreferencesKey("xp")
     private val streakKey = intPreferencesKey("streak")
     private val lastActiveKey = longPreferencesKey("last_active_epoch_day")
+    private val failedKey = stringSetPreferencesKey("failed")
 
     val xp: Flow<Int> = context.dataStore.data.map { it[xpKey] ?: 0 }
 
@@ -43,6 +45,20 @@ class ProgressStore(private val context: Context) {
                 else -> 1                        // racha nueva
             }
             prefs[lastActiveKey] = today
+        }
+    }
+
+    /** Claves "leccionId:indice" de preguntas falladas pendientes de repasar. */
+    val failed: Flow<Set<String>> = context.dataStore.data.map { it[failedKey] ?: emptySet() }
+
+    suspend fun addFailed(key: String) {
+        context.dataStore.edit { it[failedKey] = (it[failedKey] ?: emptySet()) + key }
+    }
+
+    suspend fun removeFailed(key: String) {
+        context.dataStore.edit { prefs ->
+            val current = prefs[failedKey] ?: emptySet()
+            if (key in current) prefs[failedKey] = current - key
         }
     }
 
